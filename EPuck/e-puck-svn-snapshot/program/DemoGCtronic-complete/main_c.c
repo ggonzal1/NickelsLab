@@ -1,8 +1,5 @@
 // our test version
 
-// New valid comment.
-
-
 #include "p30f6014A.h"
 
 #define IR_RECIEVER
