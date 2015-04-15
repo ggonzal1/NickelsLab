@@ -252,102 +252,102 @@ int run_asercom(void) {
 			i=0;
 			do {
 				switch(-c) { 
-        		case 'a': // Read acceleration sensors in a non
-                  // filtered way, some as ASCII
-          			accx = e_get_acc_filtered(0, 1); 
-          			accy = e_get_acc_filtered(1, 1); 
-          			accz = e_get_acc_filtered(2, 1); 
-				
-				//accx = e_get_acc(0);	//too much noisy
-				//accy = e_get_acc(1);
-				//accz = e_get_acc(2);
-
-				buffer[i++] = accx & 0xff;
-          			buffer[i++] = accx >> 8;
-          			buffer[i++] = accy & 0xff;
-          			buffer[i++] = accy >> 8;
-          			buffer[i++] = accz & 0xff;
-          			buffer[i++] = accz >> 8;
-				
-				/*
-          			accelero_raw=e_read_acc_xyz();
-				ptr=(char *)&accelero_raw.acc_x;
-				buffer[i++]=(*ptr);
-				ptr++;
-				buffer[i++]=(*ptr);
-				ptr++;
-
-				ptr=(char *)&accelero_raw.acc_y;
-				buffer[i++]=(*ptr);
-				ptr++;
-				buffer[i++]=(*ptr);
-				ptr++;
-
-				ptr=(char *)&accelero_raw.acc_z;
-				buffer[i++]=(*ptr);
-				ptr++;
-				buffer[i++]=(*ptr);
-				ptr++;
-				*/
+//        		case 'a': // Read acceleration sensors in a non
+//                  // filtered way, some as ASCII
+//          			accx = e_get_acc_filtered(0, 1);
+//          			accy = e_get_acc_filtered(1, 1);
+//          			accz = e_get_acc_filtered(2, 1);
+//
+//				//accx = e_get_acc(0);	//too much noisy
+//				//accy = e_get_acc(1);
+//				//accz = e_get_acc(2);
+//
+//				buffer[i++] = accx & 0xff;
+//          			buffer[i++] = accx >> 8;
+//          			buffer[i++] = accy & 0xff;
+//          			buffer[i++] = accy >> 8;
+//          			buffer[i++] = accz & 0xff;
+//          			buffer[i++] = accz >> 8;
+//
+//				/*
+//          			accelero_raw=e_read_acc_xyz();
+//				ptr=(char *)&accelero_raw.acc_x;
+//				buffer[i++]=(*ptr);
+//				ptr++;
+//				buffer[i++]=(*ptr);
+//				ptr++;
+//
+//				ptr=(char *)&accelero_raw.acc_y;
+//				buffer[i++]=(*ptr);
+//				ptr++;
+//				buffer[i++]=(*ptr);
+//				ptr++;
+//
+//				ptr=(char *)&accelero_raw.acc_z;
+//				buffer[i++]=(*ptr);
+//				ptr++;
+//				buffer[i++]=(*ptr);
+//				ptr++;
+//				*/
           			break;
-				case 'A': // read acceleration sensors
-					accelero=e_read_acc_spheric();
-					ptr=(char *)&accelero.acceleration;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-				
-					ptr=(char *)&accelero.orientation;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-		
-					ptr=(char *)&accelero.inclination;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
-					ptr++;
-					buffer[i++]=(*ptr);
+//				case 'A': // read acceleration sensors
+//					accelero=e_read_acc_spheric();
+//					ptr=(char *)&accelero.acceleration;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//
+//					ptr=(char *)&accelero.orientation;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//
+//					ptr=(char *)&accelero.inclination;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
+//					ptr++;
+//					buffer[i++]=(*ptr);
 				
 					break;
 				case 'b': // battery ok?
 					buffer[i++] = BATT_LOW;
 					break;
 				case 'D': // set motor speed
-					if(use_bt) {
-						while (e_getchar_uart1(&c1)==0);
-						while (e_getchar_uart1(&c2)==0);
-					} else {
-						while (e_getchar_uart2(&c1)==0);
-						while (e_getchar_uart2(&c2)==0);
-					}
-					speedl=(unsigned char)c1+((unsigned int)c2<<8);
-					if(use_bt) {
-						while (e_getchar_uart1(&c1)==0);
-						while (e_getchar_uart1(&c2)==0);
-					} else {
-						while (e_getchar_uart2(&c1)==0);
-						while (e_getchar_uart2(&c2)==0);					
-					}
-					speedr=(unsigned char)c1+((unsigned  int)c2<<8);
-					e_set_speed_left(speedl);
-					e_set_speed_right(speedr);
+//					if(use_bt) {
+//						while (e_getchar_uart1(&c1)==0);
+//						while (e_getchar_uart1(&c2)==0);
+//					} else {
+//						while (e_getchar_uart2(&c1)==0);
+//						while (e_getchar_uart2(&c2)==0);
+//					}
+//					speedl=(unsigned char)c1+((unsigned int)c2<<8);
+//					if(use_bt) {
+//						while (e_getchar_uart1(&c1)==0);
+//						while (e_getchar_uart1(&c2)==0);
+//					} else {
+//						while (e_getchar_uart2(&c1)==0);
+//						while (e_getchar_uart2(&c2)==0);
+//					}
+//					speedr=(unsigned char)c1+((unsigned  int)c2<<8);
+//					e_set_speed_left(speedl);
+//					e_set_speed_right(speedr);
 					break;
-        		case 'E': // get motor speed
-          			buffer[i++] = speedl & 0xff;
-          			buffer[i++] = speedl >> 8;
-          			buffer[i++] = speedr & 0xff;
-          			buffer[i++] = speedr >> 8;
+//        		case 'E': // get motor speed
+//          			buffer[i++] = speedl & 0xff;
+//          			buffer[i++] = speedl >> 8;
+//          			buffer[i++] = speedr & 0xff;
+//          			buffer[i++] = speedr >> 8;
           			break;
 				case 'I': // get camera image
 					if(use_bt) {
@@ -373,13 +373,13 @@ int run_asercom(void) {
 								e_set_body_led(c2);
 							}
 							break;
-						case 9:
-							if(use_bt) {
-								e_set_front_led(c2);
-							}
+//						case 9:
+//							if(use_bt) {
+//								e_set_front_led(c2);
+//							}
 							break;
-						default:
-							e_set_led(c1,c2);
+//						default:
+//							e_set_led(c1,c2);
 							break;
 					}
 					break;
@@ -405,67 +405,67 @@ int run_asercom(void) {
 					for(j=0;j<6;j++) buffer[i++]=0;
 #endif
 					break;
-				case 'N': // read proximity sensors
-					if(use_bt) {
-						for(j=0;j<8;j++) {
-							n=e_get_calibrated_prox(j);	// or ? n=e_get_prox(j);
-							buffer[i++]=n&0xff;
-							buffer[i++]=n>>8;
-						}
-					} else {
-						for(j=0;j<10;j++) {
-							n=e_get_calibrated_prox(j);	// or ? n=e_get_prox(j);
-							buffer[i++]=n&0xff;
-							buffer[i++]=n>>8;
-						}
-					}
+//				case 'N': // read proximity sensors
+//					if(use_bt) {
+//						for(j=0;j<8;j++) {
+//							n=e_get_calibrated_prox(j);	// or ? n=e_get_prox(j);
+//							buffer[i++]=n&0xff;
+//							buffer[i++]=n>>8;
+//						}
+//					} else {
+//						for(j=0;j<10;j++) {
+//							n=e_get_calibrated_prox(j);	// or ? n=e_get_prox(j);
+//							buffer[i++]=n&0xff;
+//							buffer[i++]=n>>8;
+//						}
+//					}
 					break;
-				case 'O': // read light sensors
-					if(use_bt) {
-						for(j=0;j<8;j++) {
-	
-							n=e_get_ambient_light(j);
-							buffer[i++]=n&0xff;
-							buffer[i++]=n>>8;
-						}
-					} else {
-						for(j=0;j<10;j++) {
-							n=e_get_ambient_light(j);
-							buffer[i++]=n&0xff;
-							buffer[i++]=n>>8;
-						}
-					}
+//				case 'O': // read light sensors
+//					if(use_bt) {
+//						for(j=0;j<8;j++) {
+//
+//							n=e_get_ambient_light(j);
+//							buffer[i++]=n&0xff;
+//							buffer[i++]=n>>8;
+//						}
+//					} else {
+//						for(j=0;j<10;j++) {
+//							n=e_get_ambient_light(j);
+//							buffer[i++]=n&0xff;
+//							buffer[i++]=n>>8;
+//						}
+//					}
 					break;
-				case 'Q': // read encoders
-                    n=e_get_steps_left();
-					buffer[i++]=n&0xff;
-					buffer[i++]=n>>8;
-                    n=e_get_steps_right();
-					buffer[i++]=n&0xff;
-					buffer[i++]=n>>8;
+//				case 'Q': // read encoders
+//                    n=e_get_steps_left();
+//					buffer[i++]=n&0xff;
+//					buffer[i++]=n>>8;
+//                    n=e_get_steps_right();
+//					buffer[i++]=n&0xff;
+//					buffer[i++]=n>>8;
 					break;
-        		case 'u': // get last micro volumes
-          			n = e_get_micro_volume(0);
-          			buffer[i++] = n & 0xff;
-          			buffer[i++] = n >> 8;
-
-          			n = e_get_micro_volume(1);
-          			buffer[i++] = n & 0xff;
-          			buffer[i++] = n >> 8;
-
-          			n = e_get_micro_volume(2);
-          			buffer[i++] = n & 0xff;
-          			buffer[i++] = n >> 8;
+//        		case 'u': // get last micro volumes
+//          			n = e_get_micro_volume(0);
+//          			buffer[i++] = n & 0xff;
+//          			buffer[i++] = n >> 8;
+//
+//          			n = e_get_micro_volume(1);
+//          			buffer[i++] = n & 0xff;
+//          			buffer[i++] = n >> 8;
+//
+//          			n = e_get_micro_volume(2);
+//          			buffer[i++] = n & 0xff;
+//          			buffer[i++] = n >> 8;
           			break;
-				case 'U': // get micro buffer
-					ptr=(char *)e_mic_scan;
-					if(use_bt) {
-						e_send_uart1_char(ptr,600);//send sound buffer
-					} else {
-						e_send_uart2_char(ptr,600);//send sound buffer
-					}
-					n=e_last_mic_scan_id;//send last scan
-					buffer[i++]=n&0xff;
+//				case 'U': // get micro buffer
+//					ptr=(char *)e_mic_scan;
+//					if(use_bt) {
+//						e_send_uart1_char(ptr,600);//send sound buffer
+//					} else {
+//						e_send_uart2_char(ptr,600);//send sound buffer
+//					}
+//					n=e_last_mic_scan_id;//send last scan
+//					buffer[i++]=n&0xff;
 					break;
 				default: // silently ignored
 					break;
@@ -514,201 +514,201 @@ int run_asercom(void) {
 				buffer[0]=toupper(buffer[0]); // we also accept lowercase letters
 			}
 			switch (buffer[0]) {
-			case 'A': // read accelerometer
-				sprintf(buffer,"a,%d,%d,%d\r\n",
-				        e_get_acc_filtered(0, 1),e_get_acc_filtered(1, 1),e_get_acc_filtered(2, 1));
-						// e_get_acc(0),e_get_acc(1),e_get_acc(2));
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}
+//			case 'A': // read accelerometer
+//				sprintf(buffer,"a,%d,%d,%d\r\n",
+//				        e_get_acc_filtered(0, 1),e_get_acc_filtered(1, 1),e_get_acc_filtered(2, 1));
+//						// e_get_acc(0),e_get_acc(1),e_get_acc(2));
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'b':	// battery is ok?
-				sprintf(buffer,"b,%d\r\n", BATT_LOW);	// BATT_LOW=1 => battery ok, BATT_LOW=0 => battery<3.4V
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}				
+//			case 'b':	// battery is ok?
+//				sprintf(buffer,"b,%d\r\n", BATT_LOW);	// BATT_LOW=1 => battery ok, BATT_LOW=0 => battery<3.4V
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'B': // set body led
-				sscanf(buffer,"B,%d\r",&LED_action);
-				if(use_bt) {
-					e_set_body_led(LED_action);
-					uart1_send_static_text("b\r\n");
-				} else {
-					uart2_send_static_text("b\r\n");
-				}
+//			case 'B': // set body led
+//				sscanf(buffer,"B,%d\r",&LED_action);
+//				if(use_bt) {
+//					e_set_body_led(LED_action);
+//					uart1_send_static_text("b\r\n");
+//				} else {
+//					uart2_send_static_text("b\r\n");
+//				}
 				break;
-			case 'C': // read selector position
-				selector = SELECTOR0 + 2*SELECTOR1 + 4*SELECTOR2 + 8*SELECTOR3;
-				sprintf(buffer,"c,%d\r\n",selector);
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}
+//			case 'C': // read selector position
+//				selector = SELECTOR0 + 2*SELECTOR1 + 4*SELECTOR2 + 8*SELECTOR3;
+//				sprintf(buffer,"c,%d\r\n",selector);
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'D': // set motor speed
-				sscanf(buffer, "D,%d,%d\r", &speedl, &speedr);
-				e_set_speed_left(speedl);
-				e_set_speed_right(speedr);
-				if(use_bt) {
-					uart1_send_static_text("d\r\n");
-				} else {
-					uart2_send_static_text("d\r\n");
-				}
+//			case 'D': // set motor speed
+//				sscanf(buffer, "D,%d,%d\r", &speedl, &speedr);
+//				e_set_speed_left(speedl);
+//				e_set_speed_right(speedr);
+//				if(use_bt) {
+//					uart1_send_static_text("d\r\n");
+//				} else {
+//					uart2_send_static_text("d\r\n");
+//				}
 				break;
-			case 'E': // read motor speed
-				sprintf(buffer,"e,%d,%d\r\n",speedl,speedr);
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}
+//			case 'E': // read motor speed
+//				sprintf(buffer,"e,%d,%d\r\n",speedl,speedr);
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break; 
-			case 'F': // set front led
-				sscanf(buffer,"F,%d\r",&LED_action);
-				if(use_bt) {
-					e_set_front_led(LED_action);
-					uart1_send_static_text("f\r\n");
-				} else {
-					uart2_send_static_text("f\r\n");
-				}
+//			case 'F': // set front led
+//				sscanf(buffer,"F,%d\r",&LED_action);
+//				if(use_bt) {
+//					e_set_front_led(LED_action);
+//					uart1_send_static_text("f\r\n");
+//				} else {
+//					uart2_send_static_text("f\r\n");
+//				}
 				break;
 #ifdef IR_RECEIVER				
 			case 'G':
-					if(use_bt) {
-                  	sprintf(buffer,"g IR check : 0x%x, address : 0x%x, data : 0x%x\r\n", e_get_check(), e_get_address(), e_get_data());
-                  	uart1_send_text(buffer);
-					}
+//					if(use_bt) {
+//                  	sprintf(buffer,"g IR check : 0x%x, address : 0x%x, data : 0x%x\r\n", e_get_check(), e_get_address(), e_get_data());
+//                  	uart1_send_text(buffer);
+//					}
                   break;
 #endif
-			case 'H': // ask for help
-				if(use_bt) {
-					uart1_send_static_text("\n");
-					uart1_send_static_text("\"A\"         Accelerometer\r\n");
-					//uart1_send_static_text("\"B,#\"       Body led 0=off 1=on 2=inverse\r\n");
-					uart1_send_static_text("\"b\"		Battery ok?\r\n");
-					uart1_send_static_text("\"C\"         Selector position\r\n");
-					uart1_send_static_text("\"D,#,#\"     Set motor speed left,right\r\n");
-					uart1_send_static_text("\"E\"         Get motor speed left,right\r\n");
-					//uart1_send_static_text("\"F,#\"       Front led 0=off 1=on 2=inverse\r\n");
-	#ifdef IR_RECEIVER
-					uart1_send_static_text("\"G\"         IR receiver\r\n");
-	#endif
-					uart1_send_static_text("\"H\"	     Help\r\n");
-					//uart1_send_static_text("\"I\"         Get camera parameter\r\n");
-					//uart1_send_static_text("\"J,#,#,#,#,#,#\" Set camera parameter mode,width,heigth,zoom(1,4 or 8),x1,y1\r\n");
-					uart1_send_static_text("\"K\"         Calibrate proximity sensors\r\n");
-					uart1_send_static_text("\"L,#,#\"     Led number,0=off 1=on 2=inverse\r\n");
-	#ifdef FLOOR_SENSORS
-					uart1_send_static_text("\"M\"         Floor sensors\r\n");
-	#endif
-					uart1_send_static_text("\"N\"         Proximity\r\n");
-					uart1_send_static_text("\"O\"         Light sensors\r\n");
-					uart1_send_static_text("\"P,#,#\"     Set motor position left,right\r\n");
-					uart1_send_static_text("\"Q\"         Get motor position left,right\r\n");
-					uart1_send_static_text("\"R\"         Reset e-puck\r\n");
-					uart1_send_static_text("\"S\"         Stop e-puck and turn off leds\r\n");
-					//uart1_send_static_text("\"T,#\"       Play sound 1-5 else stop sound\r\n");
-					uart1_send_static_text("\"U\"         Get microphone amplitude\r\n");
-					uart1_send_static_text("\"V\"         Version of SerCom\r\n");
-					//uart1_send_static_text("\"W\"         Write I2C (mod,reg,val)\r\n");
-					//uart1_send_static_text("\"Y\"         Read I2C val=(mod,reg)\r\n");
-				} else {
-					uart2_send_static_text("\n");
-					uart2_send_static_text("\"A\"         Accelerometer\r\n");
-					uart1_send_static_text("\"b\"		Battery ok?\r\n");				
-					//uart2_send_static_text("\"B,#\"       Body led 0=off 1=on 2=inverse\r\n");
-					uart2_send_static_text("\"C\"         Selector position\r\n");
-					uart2_send_static_text("\"D,#,#\"     Set motor speed left,right\r\n");
-					uart2_send_static_text("\"E\"         Get motor speed left,right\r\n");
-					//uart2_send_static_text("\"F,#\"       Front led 0=off 1=on 2=inverse\r\n");
-	#ifdef IR_RECEIVER
-					uart2_send_static_text("\"G\"         IR receiver\r\n");
-	#endif
-					uart2_send_static_text("\"H\"	     Help\r\n");
-					//uart2_send_static_text("\"I\"         Get camera parameter\r\n");
-					//uart2_send_static_text("\"J,#,#,#,#,#,#\" Set camera parameter mode,width,heigth,zoom(1,4 or 8),x1,y1\r\n");
-					uart2_send_static_text("\"K\"         Calibrate proximity sensors\r\n");
-					uart2_send_static_text("\"L,#,#\"     Led number,0=off 1=on 2=inverse\r\n");
-	#ifdef FLOOR_SENSORS
-					uart2_send_static_text("\"M\"         Floor sensors\r\n");
-	#endif
-					uart2_send_static_text("\"N\"         Proximity\r\n");
-					uart2_send_static_text("\"O\"         Light sensors\r\n");
-					uart2_send_static_text("\"P,#,#\"     Set motor position left,right\r\n");
-					uart2_send_static_text("\"Q\"         Get motor position left,right\r\n");
-					uart2_send_static_text("\"R\"         Reset e-puck\r\n");
-					uart2_send_static_text("\"S\"         Stop e-puck and turn off leds\r\n");
-					//uart2_send_static_text("\"T,#\"       Play sound 1-5 else stop sound\r\n");
-					uart2_send_static_text("\"U\"         Get microphone amplitude\r\n");
-					uart2_send_static_text("\"V\"         Version of SerCom\r\n");
-					//uart2_send_static_text("\"W\"         Write I2C (mod,reg,val)\r\n");
-					//uart2_send_static_text("\"Y\"         Read I2C val=(mod,reg)\r\n");
-				}
+//			case 'H': // ask for help
+//				if(use_bt) {
+//					uart1_send_static_text("\n");
+//					uart1_send_static_text("\"A\"         Accelerometer\r\n");
+//					//uart1_send_static_text("\"B,#\"       Body led 0=off 1=on 2=inverse\r\n");
+//					uart1_send_static_text("\"b\"		Battery ok?\r\n");
+//					uart1_send_static_text("\"C\"         Selector position\r\n");
+//					uart1_send_static_text("\"D,#,#\"     Set motor speed left,right\r\n");
+//					uart1_send_static_text("\"E\"         Get motor speed left,right\r\n");
+//					//uart1_send_static_text("\"F,#\"       Front led 0=off 1=on 2=inverse\r\n");
+//	#ifdef IR_RECEIVER
+//					uart1_send_static_text("\"G\"         IR receiver\r\n");
+//	#endif
+//					uart1_send_static_text("\"H\"	     Help\r\n");
+//					//uart1_send_static_text("\"I\"         Get camera parameter\r\n");
+//					//uart1_send_static_text("\"J,#,#,#,#,#,#\" Set camera parameter mode,width,heigth,zoom(1,4 or 8),x1,y1\r\n");
+//					uart1_send_static_text("\"K\"         Calibrate proximity sensors\r\n");
+//					uart1_send_static_text("\"L,#,#\"     Led number,0=off 1=on 2=inverse\r\n");
+//	#ifdef FLOOR_SENSORS
+//					uart1_send_static_text("\"M\"         Floor sensors\r\n");
+//	#endif
+//					uart1_send_static_text("\"N\"         Proximity\r\n");
+//					uart1_send_static_text("\"O\"         Light sensors\r\n");
+//					uart1_send_static_text("\"P,#,#\"     Set motor position left,right\r\n");
+//					uart1_send_static_text("\"Q\"         Get motor position left,right\r\n");
+//					uart1_send_static_text("\"R\"         Reset e-puck\r\n");
+//					uart1_send_static_text("\"S\"         Stop e-puck and turn off leds\r\n");
+//					//uart1_send_static_text("\"T,#\"       Play sound 1-5 else stop sound\r\n");
+//					uart1_send_static_text("\"U\"         Get microphone amplitude\r\n");
+//					uart1_send_static_text("\"V\"         Version of SerCom\r\n");
+//					//uart1_send_static_text("\"W\"         Write I2C (mod,reg,val)\r\n");
+//					//uart1_send_static_text("\"Y\"         Read I2C val=(mod,reg)\r\n");
+//				} else {
+//					uart2_send_static_text("\n");
+//					uart2_send_static_text("\"A\"         Accelerometer\r\n");
+//					uart1_send_static_text("\"b\"		Battery ok?\r\n");
+//					//uart2_send_static_text("\"B,#\"       Body led 0=off 1=on 2=inverse\r\n");
+//					uart2_send_static_text("\"C\"         Selector position\r\n");
+//					uart2_send_static_text("\"D,#,#\"     Set motor speed left,right\r\n");
+//					uart2_send_static_text("\"E\"         Get motor speed left,right\r\n");
+//					//uart2_send_static_text("\"F,#\"       Front led 0=off 1=on 2=inverse\r\n");
+//	#ifdef IR_RECEIVER
+//					uart2_send_static_text("\"G\"         IR receiver\r\n");
+//	#endif
+//					uart2_send_static_text("\"H\"	     Help\r\n");
+//					//uart2_send_static_text("\"I\"         Get camera parameter\r\n");
+//					//uart2_send_static_text("\"J,#,#,#,#,#,#\" Set camera parameter mode,width,heigth,zoom(1,4 or 8),x1,y1\r\n");
+//					uart2_send_static_text("\"K\"         Calibrate proximity sensors\r\n");
+//					uart2_send_static_text("\"L,#,#\"     Led number,0=off 1=on 2=inverse\r\n");
+//	#ifdef FLOOR_SENSORS
+//					uart2_send_static_text("\"M\"         Floor sensors\r\n");
+//	#endif
+//					uart2_send_static_text("\"N\"         Proximity\r\n");
+//					uart2_send_static_text("\"O\"         Light sensors\r\n");
+//					uart2_send_static_text("\"P,#,#\"     Set motor position left,right\r\n");
+//					uart2_send_static_text("\"Q\"         Get motor position left,right\r\n");
+//					uart2_send_static_text("\"R\"         Reset e-puck\r\n");
+//					uart2_send_static_text("\"S\"         Stop e-puck and turn off leds\r\n");
+//					//uart2_send_static_text("\"T,#\"       Play sound 1-5 else stop sound\r\n");
+//					uart2_send_static_text("\"U\"         Get microphone amplitude\r\n");
+//					uart2_send_static_text("\"V\"         Version of SerCom\r\n");
+//					//uart2_send_static_text("\"W\"         Write I2C (mod,reg,val)\r\n");
+//					//uart2_send_static_text("\"Y\"         Read I2C val=(mod,reg)\r\n");
+//				}
 				break;
 			case 'I':  
-				if(use_bt) {
-					sprintf(buffer,"i,%d,%d,%d,%d,%d\r\n",cam_mode,cam_width,cam_heigth,cam_zoom,cam_size);
-					uart1_send_text(buffer);
-				}
+//				if(use_bt) {
+//					sprintf(buffer,"i,%d,%d,%d,%d,%d\r\n",cam_mode,cam_width,cam_heigth,cam_zoom,cam_size);
+//					uart1_send_text(buffer);
+//				}
 				break;
-			case 'J'://set camera parameter see also cam library
-				if(use_bt) {
-					cam_x1=-1; cam_y1=-1;
-					sscanf(buffer,"J,%d,%d,%d,%d,%d,%d\r",&cam_mode,&cam_width,&cam_heigth,&cam_zoom,&cam_x1,&cam_y1);
-					if(cam_mode==GREY_SCALE_MODE)
-						cam_size=cam_width*cam_heigth;
-					else
-						cam_size=cam_width*cam_heigth*2;
-					if (cam_size>BUFFER_SIZE) {	// if desired settings too demanding set to a reasonable default
-						cam_mode=RGB_565_MODE;
-						cam_width=40; // DEFAULT_WIDTH;
-						cam_heigth=40; // DEFAULT_HEIGHT;
-						cam_size=cam_width*cam_heigth*2;
-					}
-					e_poxxxx_init_cam();
-					if (cam_x1==-1) { // user did not specify: take default
-						cam_x1=(ARRAY_WIDTH -cam_width*cam_zoom)/2;
-					}
-					if (cam_y1==-1) { // user did not specify: take default
-						cam_y1=(ARRAY_HEIGHT-cam_heigth*cam_zoom)/2;
-					}
-					e_poxxxx_config_cam(cam_x1,cam_y1,cam_width*cam_zoom,cam_heigth*cam_zoom,cam_zoom,cam_zoom,cam_mode);
-	    			e_poxxxx_set_mirror(1,1);
-	   				e_poxxxx_write_cam_registers();
-	   				uart1_send_static_text("j\r\n");
-				}
+//			case 'J'://set camera parameter see also cam library
+//				if(use_bt) {
+//					cam_x1=-1; cam_y1=-1;
+//					sscanf(buffer,"J,%d,%d,%d,%d,%d,%d\r",&cam_mode,&cam_width,&cam_heigth,&cam_zoom,&cam_x1,&cam_y1);
+//					if(cam_mode==GREY_SCALE_MODE)
+//						cam_size=cam_width*cam_heigth;
+//					else
+//						cam_size=cam_width*cam_heigth*2;
+//					if (cam_size>BUFFER_SIZE) {	// if desired settings too demanding set to a reasonable default
+//						cam_mode=RGB_565_MODE;
+//						cam_width=40; // DEFAULT_WIDTH;
+//						cam_heigth=40; // DEFAULT_HEIGHT;
+//						cam_size=cam_width*cam_heigth*2;
+//					}
+//					e_poxxxx_init_cam();
+//					if (cam_x1==-1) { // user did not specify: take default
+//						cam_x1=(ARRAY_WIDTH -cam_width*cam_zoom)/2;
+//					}
+//					if (cam_y1==-1) { // user did not specify: take default
+//						cam_y1=(ARRAY_HEIGHT-cam_heigth*cam_zoom)/2;
+//					}
+//					e_poxxxx_config_cam(cam_x1,cam_y1,cam_width*cam_zoom,cam_heigth*cam_zoom,cam_zoom,cam_zoom,cam_mode);
+//	    			e_poxxxx_set_mirror(1,1);
+//	   				e_poxxxx_write_cam_registers();
+//	   				uart1_send_static_text("j\r\n");
+//				}
    				break;
-			case 'K':  // calibrate proximity sensors
-				if(use_bt) {
-					uart1_send_static_text("k, Starting calibration - Remove any object in sensors range\r\n");
-				} else {
-					uart2_send_static_text("k, Starting calibration - Remove any object in sensors range\r\n");
-				}
-				int long t;
-				e_set_led(8,1);
-				for (t=0;t<1000000;++t);
-				e_led_clear();
-				for (t=0;t<10000;++t);
-				e_calibrate_ir();
-				if(use_bt) {
-					uart1_send_static_text("k, Calibration finished\r\n");
-				} else {
-					uart2_send_static_text("k, Calibration finished\r\n");
-				}
+//			case 'K':  // calibrate proximity sensors
+//				if(use_bt) {
+//					uart1_send_static_text("k, Starting calibration - Remove any object in sensors range\r\n");
+//				} else {
+//					uart2_send_static_text("k, Starting calibration - Remove any object in sensors range\r\n");
+//				}
+//				int long t;
+//				e_set_led(8,1);
+//				for (t=0;t<1000000;++t);
+//				e_led_clear();
+//				for (t=0;t<10000;++t);
+//				e_calibrate_ir();
+//				if(use_bt) {
+//					uart1_send_static_text("k, Calibration finished\r\n");
+//				} else {
+//					uart2_send_static_text("k, Calibration finished\r\n");
+//				}
 				break;
-			case 'L': // set led
-				sscanf(buffer,"L,%d,%d\r",&LED_nbr,&LED_action);
-				e_set_led(LED_nbr,LED_action);
-				if(use_bt) {
-					uart1_send_static_text("l\r\n");
-				} else {
-					uart2_send_static_text("l\r\n");
-				}
+//			case 'L': // set led
+//				sscanf(buffer,"L,%d,%d\r",&LED_nbr,&LED_action);
+//				e_set_led(LED_nbr,LED_action);
+//				if(use_bt) {
+//					uart1_send_static_text("l\r\n");
+//				} else {
+//					uart2_send_static_text("l\r\n");
+//				}
 				break;
 			case 'M': // read floor sensors (optional)
 #ifdef FLOOR_SENSORS
@@ -757,153 +757,153 @@ int run_asercom(void) {
 		}
 #endif
 				break;
-			case 'N': // read proximity sensors
-				if(use_bt) {
-					sprintf(buffer,"n,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
-				        e_get_calibrated_prox(0),e_get_calibrated_prox(1),e_get_calibrated_prox(2),e_get_calibrated_prox(3),
-				        e_get_calibrated_prox(4),e_get_calibrated_prox(5),e_get_calibrated_prox(6),e_get_calibrated_prox(7));
-					uart1_send_text(buffer);
-				} else {
-					sprintf(buffer,"n,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
-					e_get_calibrated_prox(0),e_get_calibrated_prox(1),e_get_calibrated_prox(2),e_get_calibrated_prox(3),
-					e_get_calibrated_prox(4),e_get_calibrated_prox(5),e_get_calibrated_prox(6),e_get_calibrated_prox(7),
-					e_get_calibrated_prox(8),e_get_calibrated_prox(9));				
-					uart2_send_text(buffer);
-				}
+//			case 'N': // read proximity sensors
+//				if(use_bt) {
+//					sprintf(buffer,"n,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
+//				        e_get_calibrated_prox(0),e_get_calibrated_prox(1),e_get_calibrated_prox(2),e_get_calibrated_prox(3),
+//				        e_get_calibrated_prox(4),e_get_calibrated_prox(5),e_get_calibrated_prox(6),e_get_calibrated_prox(7));
+//					uart1_send_text(buffer);
+//				} else {
+//					sprintf(buffer,"n,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
+//					e_get_calibrated_prox(0),e_get_calibrated_prox(1),e_get_calibrated_prox(2),e_get_calibrated_prox(3),
+//					e_get_calibrated_prox(4),e_get_calibrated_prox(5),e_get_calibrated_prox(6),e_get_calibrated_prox(7),
+//					e_get_calibrated_prox(8),e_get_calibrated_prox(9));
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'O': // read ambient light sensors
-				if(use_bt) {
-					sprintf(buffer,"o,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
-				        e_get_ambient_light(0),e_get_ambient_light(1),e_get_ambient_light(2),e_get_ambient_light(3),
-				        e_get_ambient_light(4),e_get_ambient_light(5),e_get_ambient_light(6),e_get_ambient_light(7));
-					uart1_send_text(buffer);
-				} else {
-					sprintf(buffer,"o,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
-					e_get_ambient_light(0),e_get_ambient_light(1),e_get_ambient_light(2),e_get_ambient_light(3),
-					e_get_ambient_light(4),e_get_ambient_light(5),e_get_ambient_light(6),e_get_ambient_light(7),
-					e_get_ambient_light(8),e_get_ambient_light(9));
-					uart2_send_text(buffer);
-				}
+//			case 'O': // read ambient light sensors
+//				if(use_bt) {
+//					sprintf(buffer,"o,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
+//				        e_get_ambient_light(0),e_get_ambient_light(1),e_get_ambient_light(2),e_get_ambient_light(3),
+//				        e_get_ambient_light(4),e_get_ambient_light(5),e_get_ambient_light(6),e_get_ambient_light(7));
+//					uart1_send_text(buffer);
+//				} else {
+//					sprintf(buffer,"o,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\r\n",
+//					e_get_ambient_light(0),e_get_ambient_light(1),e_get_ambient_light(2),e_get_ambient_light(3),
+//					e_get_ambient_light(4),e_get_ambient_light(5),e_get_ambient_light(6),e_get_ambient_light(7),
+//					e_get_ambient_light(8),e_get_ambient_light(9));
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'P': // set motor position
-				sscanf(buffer,"P,%d,%d\r",&positionl,&positionr);
-				e_set_steps_left(positionl);
-				e_set_steps_right(positionr);
-				if(use_bt) {
-					uart1_send_static_text("p\r\n");
-				} else {
-					uart2_send_static_text("p\r\n");
-				}
+//			case 'P': // set motor position
+//				sscanf(buffer,"P,%d,%d\r",&positionl,&positionr);
+//				e_set_steps_left(positionl);
+//				e_set_steps_right(positionr);
+//				if(use_bt) {
+//					uart1_send_static_text("p\r\n");
+//				} else {
+//					uart2_send_static_text("p\r\n");
+//				}
 				break;
-			case 'Q': // read motor position
-				sprintf(buffer,"q,%d,%d\r\n",e_get_steps_left(),e_get_steps_right());
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}
+//			case 'Q': // read motor position
+//				sprintf(buffer,"q,%d,%d\r\n",e_get_steps_left(),e_get_steps_right());
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'R': // reset
-				if(use_bt) {
-					uart1_send_static_text("r\r\n");
-				} else {
-					uart2_send_static_text("r\r\n");
-				}
-				RESET();
+//			case 'R': // reset
+//				if(use_bt) {
+//					uart1_send_static_text("r\r\n");
+//				} else {
+//					uart2_send_static_text("r\r\n");
+//				}
+//				RESET();
 				break;
-			case 'S': // stop
-				e_set_speed_left(0);
-				e_set_speed_right(0);
-				e_set_led(8,0);
-				if(use_bt) {
-					uart1_send_static_text("s\r\n");
-				} else {
-					uart2_send_static_text("s\r\n");
-				}
+//			case 'S': // stop
+//				e_set_speed_left(0);
+//				e_set_speed_right(0);
+//				e_set_led(8,0);
+//				if(use_bt) {
+//					uart1_send_static_text("s\r\n");
+//				} else {
+//					uart2_send_static_text("s\r\n");
+//				}
 				break;
-			case 'T': // stop
-				if(use_bt) {
-					sscanf(buffer,"T,%d",&sound);
-					if(first==0){
-						e_init_sound();
-						first=1;
-					}
-					switch(sound)
-					{
-						case 1: e_play_sound(0,2112);break;
-						case 2: e_play_sound(2116,1760);break;
-						case 3: e_play_sound(3878,3412);break;
-						case 4: e_play_sound(7294,3732);break;
-						case 5: e_play_sound(11028,8016);break;
-						default:
-							e_close_sound();
-							first=0;
-							break;
-					}		
-					uart1_send_static_text("t\r\n");
-				} else {
-					uart2_send_static_text("t\r\n");
-				}
+//			case 'T': // stop
+//				if(use_bt) {
+//					sscanf(buffer,"T,%d",&sound);
+//					if(first==0){
+//						e_init_sound();
+//						first=1;
+//					}
+//					switch(sound)
+//					{
+//						case 1: e_play_sound(0,2112);break;
+//						case 2: e_play_sound(2116,1760);break;
+//						case 3: e_play_sound(3878,3412);break;
+//						case 4: e_play_sound(7294,3732);break;
+//						case 5: e_play_sound(11028,8016);break;
+//						default:
+//							e_close_sound();
+//							first=0;
+//							break;
+//					}
+//					uart1_send_static_text("t\r\n");
+//				} else {
+//					uart2_send_static_text("t\r\n");
+//				}
 				break;
 			case 'U':
-				sprintf(buffer,"u,%d,%d,%d\r\n",e_get_micro_volume(0),e_get_micro_volume(1),e_get_micro_volume(2));
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}
+//				sprintf(buffer,"u,%d,%d,%d\r\n",e_get_micro_volume(0),e_get_micro_volume(1),e_get_micro_volume(2));
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'V': // get version information
-				if(use_bt) {
-					uart1_send_static_text("v,Version 1.2.2 August 2008 GCtronic\r\n");
-				} else {
-					uart2_send_static_text("v,Version 1.2.2 August 2008 GCtronic\r\n");
-				}
-				sprintf(buffer,"HW version: %X\r\n",HWversion);
-				if(use_bt) {
-					uart1_send_text(buffer);
-				} else {
-					uart2_send_text(buffer);
-				}
+//			case 'V': // get version information
+//				if(use_bt) {
+//					uart1_send_static_text("v,Version 1.2.2 August 2008 GCtronic\r\n");
+//				} else {
+//					uart2_send_static_text("v,Version 1.2.2 August 2008 GCtronic\r\n");
+//				}
+//				sprintf(buffer,"HW version: %X\r\n",HWversion);
+//				if(use_bt) {
+//					uart1_send_text(buffer);
+//				} else {
+//					uart2_send_text(buffer);
+//				}
 				break;
-			case 'W': // write I2C message
-				if(use_bt) {
-					sscanf(buffer,"W,%d,%d,%d\r",&mod,&reg,&val);
-					e_i2cp_enable();
-					e_i2cp_write((char)mod, (char)reg, (char)val);	// write I2C
-					e_i2cp_disable();
-					uart1_send_static_text("w\r\n");
-				}
+//			case 'W': // write I2C message
+//				if(use_bt) {
+//					sscanf(buffer,"W,%d,%d,%d\r",&mod,&reg,&val);
+//					e_i2cp_enable();
+//					e_i2cp_write((char)mod, (char)reg, (char)val);	// write I2C
+//					e_i2cp_disable();
+//					uart1_send_static_text("w\r\n");
+//				}
 				break;
-			case 'Y': // read I2C message
-				if(use_bt) {
-					sscanf(buffer,"Y,%d,%d\r",&mod,&reg);
-	
-					sprintf(buffer,"y,%d,%d\r\n",mod, reg);
-					uart1_send_text(buffer);
-	
-	
-	
-	
-					e_i2cp_enable();
-					val= e_i2cp_read((char)mod, (char)reg);	// read I2C
-					e_i2cp_disable();
-					sprintf(buffer,"y,%d\r\n",val);
-					uart1_send_text(buffer);
-				}
+//			case 'Y': // read I2C message
+//				if(use_bt) {
+//					sscanf(buffer,"Y,%d,%d\r",&mod,&reg);
+//
+//					sprintf(buffer,"y,%d,%d\r\n",mod, reg);
+//					uart1_send_text(buffer);
+//
+//
+//
+//
+//					e_i2cp_enable();
+//					val= e_i2cp_read((char)mod, (char)reg);	// read I2C
+//					e_i2cp_disable();
+//					sprintf(buffer,"y,%d\r\n",val);
+//					uart1_send_text(buffer);
+//				}
 				break;
-			case 'Z': // scann I2C addresses
-				if(use_bt) {
-					for (j=2; j<255;j=j+2) {
-						e_i2cp_enable();
-						val= e_i2cp_read((char)j, 0);	// read I2C
-						e_i2cp_disable();
-						if (val>=0) {
-							sprintf(buffer,"%d: %d\r\n",j, val);
-							uart1_send_text(buffer);
-						}
-					}
-				}
+//			case 'Z': // scann I2C addresses
+//				if(use_bt) {
+//					for (j=2; j<255;j=j+2) {
+//						e_i2cp_enable();
+//						val= e_i2cp_read((char)j, 0);	// read I2C
+//						e_i2cp_disable();
+//						if (val>=0) {
+//							sprintf(buffer,"%d: %d\r\n",j, val);
+//							uart1_send_text(buffer);
+//						}
+//					}
+//				}
 				break;
 			default:
 				if(use_bt) {
