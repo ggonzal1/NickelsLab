@@ -76,8 +76,8 @@ Command:
   --no-gc-sections \
   --fill-upper=0 \
   --stackguard=16 \
-  --library-path=C:/Program Files/Microchip/MPLAB C30/lib \
-  --library-path=C:/Program Files (x86)/Microchip/MPLAB C30/support/dsPIC30F/gld \
+  --library-path=C:/Program Files (x86)/Microchip/xc16/v1.24/lib \
+  --library-path=C:/Program Files (x86)/Microchip/xc16/v1.24/support/dsPIC30F/gld \
   --no-force-link \
   --smart-io \
   -Map=dist/default/production/demoGCtronic.X.production.map \
