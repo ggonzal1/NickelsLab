@@ -21,7 +21,7 @@
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
-      <itemPath>../../../../../../../Program Files/Microchip/xc16/v1.21/support/dsPIC30F/gld/p30F6014A.gld</itemPath>
+      <itemPath>C:/Program Files (x86)/Microchip/xc16/v1.24/support/dsPIC30F/gld/p30F6014A.gld</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -78,8 +78,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../</Elem>
-    <Elem>../../../../../../../Program Files/Microchip/xc16/v1.21/support/dsPIC30F/gld</Elem>
-    <Elem>../../../../Users/admin1/Downloads</Elem>
+    <Elem>C:/Program Files (x86)/Microchip/xc16/v1.24/support/dsPIC30F/gld</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -116,10 +115,6 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../../../../../../../Program Files/Microchip/xc16/v1.21/support/dsPIC30F/gld/p30F6014A.gld"
-            ex="true"
-            overriding="false">
-      </item>
       <C30>
         <property key="code-model" value="large-code"/>
         <property key="const-model" value="default"/>
@@ -194,7 +189,7 @@
         <property key="enable-handles" value="true"/>
         <property key="enable-pack-data" value="true"/>
         <property key="extra-lib-directories"
-                  value="C:\Program Files\Microchip\MPLAB C30\lib;C:\Program Files (x86)\Microchip\MPLAB C30\support\dsPIC30F\gld"/>
+                  value="C:\Program Files (x86)\Microchip\xc16\v1.24\lib;C:\Program Files (x86)\Microchip\xc16\v1.24\support\dsPIC30F\gld"/>
         <property key="fill-flash-options-addr" value=""/>
         <property key="fill-flash-options-const" value=""/>
         <property key="fill-flash-options-how" value="0"/>

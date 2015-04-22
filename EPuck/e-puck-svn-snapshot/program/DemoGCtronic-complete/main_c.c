@@ -68,9 +68,9 @@ int main() {
 	//char response[50];
 
 	//system initialization 
-	e_init_port();    // configure port pins
-	e_start_agendas_processing();
-	e_init_motors();
+//	e_init_port();    // configure port pins
+//	e_start_agendas_processing();
+//	e_init_motors();
 	e_init_uart1();   // initialize UART to 115200 Kbaud
 	e_init_uart2(BAUD115200);   // initialize UART to 115200 Kbaud
 	e_init_ad_scan(ALL_ADC);
@@ -90,11 +90,11 @@ int main() {
 
 
 	if (selector==0) {
-		run_accelerometer();
+//		run_accelerometer();
 	} else if (selector==1) {
-		run_locatesound();
+//		run_locatesound();
 	} else if (selector==2) {
-		run_wallfollow();
+//		run_wallfollow();
 	} else if (selector==3) {
 		//SIO_C_DIR= INPUT_PIN;
 		//SIO_D_DIR= INPUT_PIN;
@@ -102,13 +102,13 @@ int main() {
 
 		run_asercom();		// advanced sercom protocol
 	} else if (selector==5) {	// sensor "feedback display"
-		run_SensDispl();
+//		run_SensDispl();
 	} else if (selector==6) {	// camera point to light
-		run_CameraTurn();
+//		run_CameraTurn();
 	} else if (selector==7) {	// act like the ASL RS232 - I2C translator
-		run_translatorI2C();
+//		run_translatorI2C();
 	} else if (selector==8) {	
-		run_grounddirection();
+//		run_grounddirection();
 	} else if (selector==10) {
 		//the following 3 lines are needed to release completely the camera on the robot and let use the camera on the gumstix ext.
 		SIO_C_DIR= INPUT_PIN;
@@ -118,160 +118,160 @@ int main() {
 		run_asercom();
 
 	} else if (selector==11) {	// BT configuration	
-
-		 sprintf(buffer, "\f\a\n\n\rWELCOME to the protocol on e-Puck Bluetooth calibration");
-
-		 e_send_uart2_char(buffer, strlen(buffer));  //send string
-
-		while(e_uart2_sending());
-
-		memset(buffer, 0x0, 120); 
-		sprintf(buffer, "\n\rPress H (return) for help");
-
-		 e_send_uart2_char(buffer, strlen(buffer));  //send string
-
- 		while(e_uart2_sending());
-
-		memset(buffer, 0x0, 120);
-		
-		while(1)
-
-		{	
-
-		   i = 0;
-
-			c=0;
-
-		   do
-
-		   {
-
-		     	if (e_getchar_uart2(&buffer[100+i])) //&command[i]))
-
-				{	
-
-					c=buffer[100+i];//command[i];
-
-		    		i++;
-
-				}	
-
-		   }
-
-		   while (((char)c != '\n')&&((char)c != '\x0d'));
-
-		   buffer[100+i]='\0'; //command[i]='\0';
-
-			
-
-		memset(buffer, 0x0, 100);
-
-		   switch (buffer[100]) 
-
-		   { 
-
-			case 'P':	e_bt_read_local_pin_number(buffer);
-
-						sprintf(&buffer[50],"\n\rPIN code = %s",buffer);
-
-						break;
-
-			case 'O':	sscanf(&buffer[100],"O,%s\n",buffer);
-
-						if(e_bt_write_local_pin_number(buffer))
-
-							sprintf(&buffer[50],"\n\rError writting PIN");
-
-						else
-
-							sprintf(&buffer[50],"\n\rPIN code = %s",buffer);
-
-						break;
-
-			case 'M':	sscanf(&buffer[100],"M,%s\n",buffer);
-
-						if(e_bt_write_local_name(buffer))
-
-							sprintf(&buffer[50],"\n\rError writting Name");
-
-						else
-
-							sprintf(&buffer[50],"\n\rFriendly name = %s",buffer);
-
-						break;
-
-			case 'S':	sscanf(&buffer[100],"S,%s\n",buffer);
-
-						if(e_bt_write_local_pin_number(buffer))
-
-							sprintf(&buffer[50],"\n\rError writting PIN");
-
-						else
-
-							sprintf(&buffer[50],"\n\rPIN code = %s",buffer);
-
-						e_send_uart2_char(&buffer[50],strlen(&buffer[50])); 
-
-						while(e_uart2_sending());
-
-						sprintf(&buffer[100],"e-puck_%s",buffer);
-
-						if(e_bt_write_local_name(&buffer[100]))
-
-							sprintf(&buffer[50],"\n\rError writting Name");
-
-						else
-
-							sprintf(&buffer[50],"\n\rFriendly name = %s",&buffer[100]);
-
-						break;
-
-			case 'N':	e_bt_read_local_name(buffer);
-
-						sprintf(&buffer[50],"\n\rFriendly name = %s",buffer);
-
-						break;
-
-			case 'R':	version=e_bt_reset();
-
-						sprintf(&buffer[50],"\n\rReset ok Firmware = %d",version);
-
-						break;
-			case 'F':	e_bt_factory_reset();
-					break;
-
-			case 'H':	uart2_send_static_text("\n\r \"F\" Factory reset");
-						uart2_send_static_text("\n\r \"M,Name\" Write Name for Friendly Bluetooth name");
-
-						uart2_send_static_text("\n\r \"N\" Read actual Friendly Bluetooth name");
-
-						uart2_send_static_text("\n\r \"O,#\" Write # PIN number");
-
-						uart2_send_static_text("\n\r \"P\" Read actual PIN number"); 
-
-						uart2_send_static_text("\n\r \"R\" Soft reset Bluetooth module");	
-
-						uart2_send_static_text("\n\r \"S,#\" Write # PIN number and same time e-puck_#");	
-
-						
-
-						buffer[50]='\n';
-
-						buffer[51]='\0';
-
-						break;
-
-		   	default:    sprintf(&buffer[50],"\n\rz,Command not found");
-
-		                 	break;
-
-		   }
-
-		   e_send_uart2_char(&buffer[50],strlen(&buffer[50]));
-
-		   while(e_uart2_sending());
-
-		 }		
+//
+//		 sprintf(buffer, "\f\a\n\n\rWELCOME to the protocol on e-Puck Bluetooth calibration");
+//
+//		 e_send_uart2_char(buffer, strlen(buffer));  //send string
+//
+//		while(e_uart2_sending());
+//
+//		memset(buffer, 0x0, 120);
+//		sprintf(buffer, "\n\rPress H (return) for help");
+//
+//		 e_send_uart2_char(buffer, strlen(buffer));  //send string
+//
+// 		while(e_uart2_sending());
+//
+//		memset(buffer, 0x0, 120);
+//
+//		while(1)
+//
+//		{
+//
+//		   i = 0;
+//
+//			c=0;
+//
+//		   do
+//
+//		   {
+//
+//		     	if (e_getchar_uart2(&buffer[100+i])) //&command[i]))
+//
+//				{
+//
+//					c=buffer[100+i];//command[i];
+//
+//		    		i++;
+//
+//				}
+//
+//		   }
+//
+//		   while (((char)c != '\n')&&((char)c != '\x0d'));
+//
+//		   buffer[100+i]='\0'; //command[i]='\0';
+//
+//
+//
+//		memset(buffer, 0x0, 100);
+//
+//		   switch (buffer[100])
+//
+//		   {
+//
+////			case 'P':	e_bt_read_local_pin_number(buffer);
+////
+////						sprintf(&buffer[50],"\n\rPIN code = %s",buffer);
+////
+////						break;
+////
+////			case 'O':	sscanf(&buffer[100],"O,%s\n",buffer);
+////
+////						if(e_bt_write_local_pin_number(buffer))
+////
+////							sprintf(&buffer[50],"\n\rError writting PIN");
+////
+////						else
+////
+////							sprintf(&buffer[50],"\n\rPIN code = %s",buffer);
+////
+////						break;
+//
+//			case 'M':	sscanf(&buffer[100],"M,%s\n",buffer);
+//
+//						if(e_bt_write_local_name(buffer))
+//
+//							sprintf(&buffer[50],"\n\rError writting Name");
+//
+//						else
+//
+//							sprintf(&buffer[50],"\n\rFriendly name = %s",buffer);
+//
+//						break;
+//
+//			case 'S':	sscanf(&buffer[100],"S,%s\n",buffer);
+//
+//						if(e_bt_write_local_pin_number(buffer))
+//
+//							sprintf(&buffer[50],"\n\rError writting PIN");
+//
+//						else
+//
+//							sprintf(&buffer[50],"\n\rPIN code = %s",buffer);
+//
+//						e_send_uart2_char(&buffer[50],strlen(&buffer[50]));
+//
+//						while(e_uart2_sending());
+//
+//						sprintf(&buffer[100],"e-puck_%s",buffer);
+//
+//						if(e_bt_write_local_name(&buffer[100]))
+//
+//							sprintf(&buffer[50],"\n\rError writting Name");
+//
+//						else
+//
+//							sprintf(&buffer[50],"\n\rFriendly name = %s",&buffer[100]);
+//
+//						break;
+//
+//			case 'N':	e_bt_read_local_name(buffer);
+//
+//						sprintf(&buffer[50],"\n\rFriendly name = %s",buffer);
+//
+//						break;
+//
+//			case 'R':	version=e_bt_reset();
+//
+//						sprintf(&buffer[50],"\n\rReset ok Firmware = %d",version);
+//
+//						break;
+//			case 'F':	e_bt_factory_reset();
+//					break;
+//
+//			case 'H':	uart2_send_static_text("\n\r \"F\" Factory reset");
+//						uart2_send_static_text("\n\r \"M,Name\" Write Name for Friendly Bluetooth name");
+//
+//						uart2_send_static_text("\n\r \"N\" Read actual Friendly Bluetooth name");
+//
+//						uart2_send_static_text("\n\r \"O,#\" Write # PIN number");
+//
+//						uart2_send_static_text("\n\r \"P\" Read actual PIN number");
+//
+//						uart2_send_static_text("\n\r \"R\" Soft reset Bluetooth module");
+//
+//						uart2_send_static_text("\n\r \"S,#\" Write # PIN number and same time e-puck_#");
+//
+//
+//
+//						buffer[50]='\n';
+//
+//						buffer[51]='\0';
+//
+//						break;
+//
+//		   	default:    sprintf(&buffer[50],"\n\rz,Command not found");
+//
+//		                 	break;
+//
+//		   }
+//
+//		   e_send_uart2_char(&buffer[50],strlen(&buffer[50]));
+//
+//		   while(e_uart2_sending());
+//
+//		 }
 
 	} else if (selector==12) {	// Global test
 		sprintf(buffer, "%c%c%d;%d;%dm", 0x1B, 0x5B, 1, 37, 44);	//bold
